@@ -1,0 +1,6 @@
+wget http://lloydrochester.com/code/tf_mini_plus_rpi-1.0.tar.gz
+tar zxf tf_mini_plus_rpi-1.0.tar.gz
+cd tf_mini_plus_rpi
+./configure
+make
+./src/tf_mini_plus_rpi

@@ -12,7 +12,7 @@ $ ./configure
 $ make
 ```
 
-Install it system wide
+System Wide Installation
 ```
 $ sudo make install # sudo make uninstall to uninstall
 $ tfmini --help

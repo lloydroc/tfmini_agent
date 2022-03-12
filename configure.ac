@@ -1,4 +1,4 @@
-AC_INIT([tf_mini_plus_rpi], [1.0], [lloyd@lloydrochester.com])
+AC_INIT([tf_mini_plus_rpi], [1.1], [lloyd@lloydrochester.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADERS([config.h])

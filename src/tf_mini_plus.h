@@ -50,6 +50,9 @@ int
 tf_mini_system_reset(struct TF_MINI *dev);
 
 int
+tf_mini_set_update_rate(struct TF_MINI *dev, int update_rate);
+
+int
 tf_mini_set_measure_unit(struct TF_MINI *dev, int centimeters);
 
 int

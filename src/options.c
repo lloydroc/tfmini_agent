@@ -9,16 +9,17 @@ usage(char *progname)
   printf("Usage: %s [OPTIONS]\n\n", progname);
   printf("A command line tool to interact with the TF Mini+.\n");
   printf("OPTIONS:\n\
--h, --help                     Print help\n\
--r, --reset                    SW Reset\n\
-    --firmware-version         Read firmware version\n\
-    --measure-mm               Set measurment units to mm\n\
-    --measure-cm               Set measurment units to cm\n\
-    --disable-lidar-output     Disbale output of the LiDAR\n\
-    --enable-lidar-output      Enable output of the LiDAR\n\
-    --disable-lidar-output     Disbale output of the LiDAR\n\
--x, --discard-bad-checksum     Discard LiDAR frames with bad checksums\n\
--v, --verbose                  Verbose Output\n\
+-h, --help                       Print help\n\
+-r, --reset                      SW Reset\n\
+    --firmware-version           Read firmware version\n\
+    --measure-mm                 Set measurment units to mm\n\
+    --measure-cm                 Set measurment units to cm\n\
+    --disable-lidar-output       Disbale output of the LiDAR\n\
+    --enable-lidar-output        Enable output of the LiDAR\n\
+    --disable-lidar-output       Disbale output of the LiDAR\n\
+    --set-update-rate [1~1000Hz] Set Lidar Frame Rate\n\
+-x, --discard-bad-checksum       Discard LiDAR frames with bad checksums\n\
+-v, --verbose                    Verbose Output\n\
 -u, --socket-udp HOST:PORT     Output data to a UDP Socket\n\
 -p, --poll                     Poll the LiDAR and print to STDOUT\n\
 -d, --daemon                   Run as a Daemon\n\
@@ -35,6 +36,8 @@ options_init(struct options *opts)
   opts->read_firmware_version = 0;
   opts->set_measurement_unit_cm = 0;
   opts->set_measurement_unit_mm = 0;
+  opts->update_rate = -1;
+  opts->baud_rate = -1;
   opts->enable_lidar_output = 0;
   opts->disable_lidar_output = 0;
   opts->uart_dev = 0;
@@ -139,6 +142,8 @@ options_parse(struct options *opts, int argc, char *argv[])
     {"firmware-version",           no_argument, 0,   0},
     {"measure-mm",                 no_argument, 0,   0},
     {"measure-cm",                 no_argument, 0,   0},
+    {"set-update-rate",      required_argument, 0,   0},
+    {"set-baud-rate",        required_argument, 0,   0},
     {"enable-lidar-output",        no_argument, 0,   0},
     {"disable-lidar-output",       no_argument, 0,   0},
     {"discard-bad-checksum",       no_argument, 0, 'x'},
@@ -171,6 +176,10 @@ options_parse(struct options *opts, int argc, char *argv[])
         opts->set_measurement_unit_mm = 1;
       else if(strcmp("measure-cm", long_options[option_index].name) == 0)
         opts->set_measurement_unit_cm = 1;
+      else if(strcmp("set-update-rate", long_options[option_index].name) == 0)
+        opts->update_rate = atoi(optarg);
+      else if(strcmp("set-baud-rate", long_options[option_index].name) == 0)
+        opts->baud_rate = atoi(optarg);
       else if(strcmp("firmware-version", long_options[option_index].name) == 0)
         opts->read_firmware_version = 1;
       else if(strcmp("poll", long_options[option_index].name) == 0)

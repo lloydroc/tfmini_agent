@@ -101,9 +101,9 @@ main(int argc, char *argv[])
   {
     ret |= tf_mini_system_reset(&dev);
   }
-  if(opts.baud_rate != -1)
+  if(opts.update_rate != -1)
   {
-    ret |= tf_mini_set_update_rate(&dev, opts.baud_rate);
+    ret |= tf_mini_set_update_rate(&dev, opts.update_rate);
   }
   if(opts.set_measurement_unit_mm)
   {

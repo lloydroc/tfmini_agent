@@ -120,35 +120,35 @@ tf_mini_system_reset(struct TF_MINI *dev)
 }
 
 int
-tf_mini_set_update_rate(struct TF_MINI *dev, int update_rate)
+tf_mini_set_update_rate(struct TF_MINI *dev, uint16_t update_rate)
 {
   struct TF_MINI_FRAME frame;
   int ret;
   int reset_failed;
 
-  frame.downlink_size = 5;
+  frame.downlink_size = 6;
   frame.downlink[0] = 0x5A;
   frame.downlink[1] = 0x06;
   frame.downlink[2] = 0x03;
-  frame.downlink[3] = (uint8_t) (update_rate >> 8);
-  frame.downlink[4] = (uint8_t) (update_rate && 0xFF00);
+  memcpy(frame.downlink+3, &update_rate, 2);
+
   frame.calc_downlink_checksum = 1;
 
-  frame.uplink_size = 5;
+  frame.uplink_size = 6;
 
   ret = tf_mini_send_command(dev, &frame);
   if(ret)
   {
-    err_output("unable to set update rate %d\n", ret);
+    err_output("unable to set update rate to %dHz, got error code %d\n", update_rate, ret);
     return ret;
   }
 
-  reset_failed = frame.uplink[4];
+  reset_failed = frame.uplink[5] != frame.downlink[5];
 
   if(reset_failed)
-    warn_output("update rate to %d failed\n", update_rate);
+    warn_output("update rate to %dHz failed\n", update_rate);
   else
-    info_output("update rate to %d success\n", update_rate);
+    info_output("update rate to %dHz success\n", update_rate);
 
   return reset_failed;
 }

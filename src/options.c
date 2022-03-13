@@ -9,20 +9,20 @@ usage(char *progname)
   printf("Usage: %s [OPTIONS]\n\n", progname);
   printf("A command line tool to interact with the TF Mini+.\n");
   printf("OPTIONS:\n\
--h, --help                       Print help\n\
--r, --reset                      SW Reset\n\
-    --firmware-version           Read firmware version\n\
-    --measure-mm                 Set measurment units to mm\n\
-    --measure-cm                 Set measurment units to cm\n\
-    --disable-lidar-output       Disbale output of the LiDAR\n\
-    --enable-lidar-output        Enable output of the LiDAR\n\
-    --disable-lidar-output       Disbale output of the LiDAR\n\
-    --set-update-rate [1~1000Hz] Set Lidar Frame Rate\n\
--x, --discard-bad-checksum       Discard LiDAR frames with bad checksums\n\
--v, --verbose                    Verbose Output\n\
--u, --socket-udp HOST:PORT     Output data to a UDP Socket\n\
--p, --poll                     Poll the LiDAR and print to STDOUT\n\
--d, --daemon                   Run as a Daemon\n\
+-h, --help                  Print help\n\
+-r, --reset                 SW Reset\n\
+    --firmware-version      Read firmware version\n\
+    --measure-mm            Set measurment units to mm\n\
+    --measure-cm            Set measurment units to cm\n\
+    --disable-lidar-output  Disbale output of the LiDAR\n\
+    --enable-lidar-output   Enable output of the LiDAR\n\
+    --disable-lidar-output  Disbale output of the LiDAR\n\
+    --set-update-rate RATE  Set Lidar Frame Rate [1-1000]Hz\n\
+-x, --discard-bad-checksum  Discard LiDAR frames with bad checksums\n\
+-v, --verbose               Verbose Output\n\
+-u, --socket-udp HOST:PORT  Output data to a UDP Socket\n\
+-p, --poll                  Poll the LiDAR and print to STDOUT\n\
+-d, --daemon                Run as a Daemon\n\
 ");
   printf("\nVersion: %s\n", PACKAGE_VERSION);
 }

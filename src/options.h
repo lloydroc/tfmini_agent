@@ -28,6 +28,8 @@ struct options
   int set_measurement_unit_mm;
   int enable_lidar_output;
   int disable_lidar_output;
+  uint16_t update_rate;
+  uint32_t baud_rate;
   int uart_dev;
   int daemon;
   int poll;;

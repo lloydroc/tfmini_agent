@@ -2,6 +2,7 @@
 #define TF_MINI_DEF
 
 #include <poll.h>
+#include <string.h>
 #include <sys/time.h>
 #include "options.h"
 #include "gpio.h"
@@ -48,6 +49,9 @@ tf_mini_read_firmware_version(struct TF_MINI *dev);
 
 int
 tf_mini_system_reset(struct TF_MINI *dev);
+
+int
+tf_mini_set_update_rate(struct TF_MINI *dev, uint16_t update_rate);
 
 int
 tf_mini_set_measure_unit(struct TF_MINI *dev, int centimeters);

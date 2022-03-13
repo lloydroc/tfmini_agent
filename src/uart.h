@@ -5,6 +5,6 @@
 #include <string.h>
 #include "error.h"
 
-#define UART0 "/dev/ttyAMA0"
+#define UART0 "/dev/serial0"
 
 int uart_open();

@@ -56,6 +56,16 @@ main(int argc, char *argv[])
     usage(argv[0]);
     return EXIT_SUCCESS;
   }
+  else if(opts.update_rate != -1 && (opts.update_rate == 0 || opts.update_rate > 1000))
+  {
+    fprintf(stderr, "invalid setting: lidar update rate must be between 1-1000Hz\n");
+    return EXIT_FAILURE;
+  }
+  else if(opts.baud_rate != -1)
+  {
+    fprintf(stderr, "setting baud rate currently not supported\n");
+    return EXIT_FAILURE;
+  }
   else if(opts.enable_lidar_output && opts.disable_lidar_output)
   {
     fprintf(stderr, "cannot disable and enable lidar output\n");
@@ -90,6 +100,10 @@ main(int argc, char *argv[])
   if(opts.reset)
   {
     ret |= tf_mini_system_reset(&dev);
+  }
+  if(opts.update_rate != -1)
+  {
+    ret |= tf_mini_set_update_rate(&dev, opts.update_rate);
   }
   if(opts.set_measurement_unit_mm)
   {

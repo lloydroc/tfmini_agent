@@ -81,6 +81,15 @@ main(int argc, char *argv[])
   if(ret)
     goto cleanup;
 
+  if(opts.daemon)
+  {
+    if(become_daemon())
+    {
+      err_output("become_daemon\n");
+      return 100;
+    }
+  }
+
   // disable output first
   if(opts.needs_output_disabled)
   {
@@ -116,11 +125,6 @@ main(int argc, char *argv[])
   if(opts.read_firmware_version)
   {
     ret |= tf_mini_read_firmware_version(&dev);
-  }
-
-  if(opts.daemon)
-  {
-    become_daemon();
   }
 
   // enable output if needed

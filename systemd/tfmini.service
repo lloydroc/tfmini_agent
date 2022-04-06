@@ -2,8 +2,8 @@
 Description=TF Mini Service sending LiDAR Frames over UDP
 
 [Service]
-Type=forking
-ExecStart=/usr/local/bin/tfmini --measure-cm --daemon --socket-udp 127.0.0.1:2210
+Type=simple
+ExecStart=tfmini --measure-cm --set-update-rate 3 --socket-udp 10.255.254.181:5001
 StandardOutput=journal
 StandardError=journal
 
